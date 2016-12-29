@@ -1,14 +1,174 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="utf-8">
-        <meta name="author" content="全宇宙最帅">
-        <title></title>
-        <style>
-            
-        </style>
-    </head>
-    <body>
-        hello word
-    </body>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>指针时钟</title>
+    <style class="css">
+        * {
+            box-sizing: border-box;
+        }
+
+        html, body {
+            padding: 0;
+            margin: 0;
+            border: 0;
+        }
+
+        body {
+            width: 100%;
+        }
+
+        body > div {
+            width: 300px;
+            height: 300px;
+            border: 2px solid black;
+            margin: 100px auto;
+            position: relative;
+            border-radius: 50%;
+            box-shadow: 0 0 80px 10px #999 inset;
+        }
+
+        ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            position: relative;
+        }
+
+        li {
+            position: absolute;
+
+        }
+
+        .scale li {
+            background-color: black;
+            width: 2px;
+            height: 10px;
+            top: 0;
+            left: 50%;
+            transform-origin: calc(50% - 1px) 149px;
+        }
+
+        .num > ul > li {
+            top: 20px;
+            left: calc(50% - 5px);
+            transform-origin: calc(50% - 5px) 130px;
+        }
+
+        .scale > li:nth-of-type(5n + 1) {
+            height: 20px;
+        }
+
+        .hour, .min, .sec {
+            /*秒针平滑移动*/
+            /*transition: transform 1s linear;*/
+        }
+
+        .hour {
+            width: 4px;
+            height: 70px;
+            background-color: green;
+            position: absolute;
+            top: 90px; /*伸出10px*/
+            left: 146px;
+            transform-origin: center 58px;
+            transform: rotate(50deg);
+        }
+
+        .min {
+            width: 4px;
+            height: 105px;
+            background-color: black;
+            position: absolute;
+            top: 60px; /*伸出15px*/
+            left: 146px;
+            transform-origin: center 88px;
+            transform: rotate(120deg);
+        }
+
+        .sec {
+            width: 2px;
+            height: 120px;
+            background-color: red;
+            position: absolute;
+            top: 50px; /*伸出20px*/
+            left: 147px;
+            transform-origin: center 98px;
+            transform: rotate(-120deg);
+        }
+
+        .doc {
+            width: 10px;
+            height: 10px;
+            background-color: #808080;
+            border-radius: 50%;
+            position: absolute;
+            top: calc(50% - 5px);
+            left: calc(50% - 5px);
+        }
+
+        p {
+            margin: 0;
+            font-size: 20px;
+            display: inline-block;
+            transform-origin: center center;
+        }
+    </style>
+</head>
+<body>
+<div>
+    <ul class="scale"></ul>
+    <div class="num">
+        <ul></ul>
+    </div>
+    <div class="hour"></div>
+    <div class="min"></div>
+    <div class="sec"></div>
+    <div class="doc"></div>
+</div>
+</body>
 </html>
+<script>
+    var css = document.querySelector('.css');
+    var scale = document.querySelector('.scale');
+    var num = document.querySelector('.num');
+    var num1 = document.querySelector('.num>ul');
+    var hour = document.querySelector('.hour');
+    var min = document.querySelector('.min');
+    var sec = document.querySelector('.sec');
+    var strCss = '';
+    var strLi = '';
+    var num11 = '';
+
+    for (var i = 0; i < 60; i++) {
+        strLi += '<li></li>';
+    }
+    scale.innerHTML = strLi;
+    for (var i = 0; i < 60; i++) {
+        strCss += '.scale>li:nth-of-type(' + (i + 1) + '){transform:rotate(' + (6 * i) + 'deg);}';
+    }
+    for (var i = 0; i < 12; i++) {
+        num11 += '<li><p>' + (i + 1) + '</p></li>';
+    }
+    num1.innerHTML = num11;
+    for (var i = 1; i < 13; i++) {
+        strCss += '.num>ul>li:nth-of-type(' + i + '){transform:rotate(' + (30 * i) + 'deg);}';
+        strCss += '.num>ul>li:nth-of-type(' + i + ') p{transform:rotate(' + (- 30 * i) + 'deg);}';
+    }
+    css.innerHTML += strCss;
+
+    time();
+    setInterval(time, 1000);
+
+    function time() {
+        var data = new Date();
+        var Hour = data.getHours();
+//        alert(Hour);
+        var Min = data.getMinutes();
+        var Sec = data.getSeconds();
+
+        sec.style.transform = 'rotate(' + (Sec * 6) + 'deg)';
+        min.style.transform = "rotate(" + (Min + Sec / 60) * 6 + "deg)";
+        hour.style.transform = "rotate(" + (Hour + Min / 60) * 30 + "deg)";
+    }
+</script>
