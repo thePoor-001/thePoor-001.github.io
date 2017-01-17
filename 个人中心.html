@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="initial-scale=1,user-scalable=no">
+    <script src="jquery-2.2.4.js" type="text/javascript"></script>
+    <title>个人中心</title>
+    <style>
+        *{box-sizing: border-box}
+        html{font-size: 50px}
+        html,body{margin: 0;border:0;padding: 0;}
+        #all{width:7.2rem;margin: 0 auto;border:1px solid gainsboro;height: 2300px;cursor: pointer}
+        #all #header{margin:-1px;width:7.2rem;height:40px;border:1px solid gainsboro;display:flex;justify-content:space-between;padding-top: 5px;background-color: ghostwhite;cursor: pointer}
+        #all #header span{color: dimgrey;font-size: 18px}
+        #all #header img{height:25px;width:25px;}
+        #all #hidden{margin: 0;height:65px;width:7.2rem;background-color:#615A5A;position: relative;display: none}
+        #all #hidden div{height:45px;margin: 0;padding: 0;width: 60px;}
+        #all #hidden div img{width: 30px;height: 30px;position: absolute}
+        #all #hidden div section{width:60px;height:20px;margin-top:-15px;color:white;font-size: 14px;position: absolute}
+        #all #person{width: 7.2rem;height: 180px;background-image: url('image/57b28c3cN272f63d3.png');background-size: cover;margin: -1px;padding: 0;cursor: pointer;position: relative}
+        #all #person span{font-size: 14px;color: white}
+        #all #person .name{margin-left: 25px;}
+        #all #person .name img{width: 65px;height: 65px;border-radius: 50%;margin-top: 20px;}
+        #all #person .name span{position: absolute;top: 30px;left: 100px}
+        #all #person section{font-size: 13px;color: white;position: absolute;top: 60px;right: 10px}
+        #all #person section img{width: 20px;height: 20px;position: relative;top: 5px}
+        #some{display: flex;justify-content: space-between;position: absolute;top: 109px}
+        #some div{width: 2.38rem;height:70px;text-align: center;background: rgba(34,34,34,0.3);margin: 1px;position: relative}
+        #some div span{position: absolute;top:20px;opacity: 0.9;padding: 0;margin: 0}
+        #top{width: 0.7rem;height: 0.7rem;position: fixed;bottom: 1.6rem;right:0.4rem;display: none;z-index: 100}
+        #top a img{width: 0.7rem;height: 0.7rem;position: relative;top: -0.34rem}
+        #my{height:70px;width: 7.2rem;position: relative;background:white;top: 10px}
+        #my img{width: 25px;height: 25px;position: absolute}
+        #my span{font-size: 15px;position: absolute}
+        #bus{width: 7.2rem;height:70px;display: flex;justify-content: space-around;position: absolute;top: 285px;background-color: white}
+        #bus img{width: 25px;height: 25px;position: absolute;top:15px}
+        #bus span{font-size: 15px;color: #615A5A;display: block;position: absolute;top: 40px}
+        #wal{height:70px;width: 7.2rem;position: relative;background:white;top: 80px}
+        #wal img{width: 25px;height: 25px;position: absolute}
+        #wal span{font-size: 15px;position: absolute}
+        #wale{width: 7.2rem;height:70px;display: flex;justify-content: space-around;position: absolute;top: 285px;background-color: white;margin-top: 150px}
+        #wale section{width: 25px;height: 25px;position: absolute;top:15px;font-size: 17px;color: #615A5A;}
+        #wale span{font-size: 15px;color: #615A5A;display: block;position: absolute;top: 40px}
+        #server{height:70px;width: 7.2rem;position: relative;background:white;top: 160px}
+        #server img{width: 25px;height: 25px;position: absolute}
+        #server span{font-size: 15px;position: absolute}
+        #menber{height:70px;width: 7.2rem;position: relative;background:white;top: 160px}
+        #menber img{width: 25px;height: 25px;position: absolute}
+        #menber span{font-size: 15px;position: absolute}
+        #poor{height:70px;width: 7.2rem;position: relative;background:white;top: 170px}
+        #poor img{width: 25px;height: 25px;position: absolute}
+        #poor span{font-size: 15px;position: absolute}
+        #full{height:70px;width: 7.2rem;position: relative;background:white;top: 160px}
+        #full img{width: 25px;height: 25px;position: absolute}
+        #full span{font-size: 15px;position: absolute}
+        #yuyue{height:70px;width: 7.2rem;position: relative;background:white;top: 160px}
+        #yuyue img{width: 25px;height: 25px;position: absolute}
+        #yuyue span{font-size: 15px;position: absolute}
+        #bigou{height:70px;width: 7.2rem;position: relative;background:white;top: 160px}
+        #bigou img{width: 25px;height: 25px;position: absolute}
+        #bigou span{font-size: 15px;position: absolute}
+        #tuijian{height:70px;width: 7.2rem;position: relative;background:white;top: 160px}
+        #tuijian img{width: 25px;height: 25px;position: absolute}
+        #tuijian span{font-size: 15px;position: absolute}
+        #foryour{position: relative;top: 210px;background-color: #F0F2F5;height:80px}
+        #foryour hr{color: gray;width: 6.8rem;height:1px;margin-left: 0.2rem;opacity: 0.4;z-index: 1}
+        #foryour section{font-size: 18px;width: 120px;height: 40px;position: absolute;top: -10px;left: 2.5rem;z-index: 2;background-color: #F0F2F5;padding-left: 40px;color: dimgray}
+        #foryour img{width: 20px;height: 20px;position: absolute;top: -8px;left: 2.65rem;z-index: 3}
+        #sp{margin-top: 180px;position: relative}
+        #sp .first .one{width: 3.55rem;height: 120px;float: left}
+        #sp .first .two{width: 3.55rem;height: 120px;float: right}
+        #sp .first span{font-size: 14px;background-color: white;display:block;}
+        #sp .first img{width: 3.55rem;height: 220px}
+        #sp .first section{font-size: 14px;width: 3.55rem;height: 55px;background-color: white;padding-right: 0.2rem;margin-top: -15px;color: black;padding-bottom: 5px;opacity: 0.8}
+        #sp .second .one{width: 3.55rem;height: 120px;float: left}
+        #sp .second .two{width: 3.55rem;height: 120px;float: right}
+        #sp .second span{font-size: 14px;background-color: white;display:block;}
+        #sp .second img{width: 3.55rem;height: 220px}
+        #sp .second section{font-size: 14px;width: 3.55rem;height: 55px;background-color: white;padding-right: 0.2rem;margin-top: -17px;color: black;padding-bottom: 5px;opacity: 0.8}
+    </style>
+</head>
+<body style="border: 1px solid gainsboro">
+<div id="all" style="background-color: #F0F2F5;">
+    <div id="header">
+        <img id="beganing" src="image/左左.png">
+        <span>我的京东</span>
+        <img class="block" src="image/菜单.png">
+    </div>
+    <!--<div style="width: 7.2rem;height: 40px"></div>-->
+    <div id="empty" style="width: 7.2rem;"></div>
+    <div id="hidden">
+        <div>
+            <img style="top: 10px;left: 0.7rem" src="image/首页-首页.png">
+            <section style="top: 55px;left: 0.7rem">首页</section>
+        </div>
+        <div>
+            <img style="top: 10px;left: 2.5rem" src="image/搜索.png">
+            <section style="top: 55px;left: 2.3rem">分类搜索</section>
+        </div>
+        <div>
+            <img style="top: 10px;left: 4.2rem" src="image/购物车.png">
+            <section style="top: 55px;left: 4.2rem">购物车</section>
+        </div>
+        <div>
+            <img style="top: 10px;left: 6rem" src="image/用户.png">
+            <section style="top: 55px;left: 5.8rem">我的京东</section>
+        </div>
+    </div>
+    <div id="person">
+        <div class="name">
+           <img src="image/defaul.png">
+            <span style="font-size: 19px">jd_737c697438cec</span><br>
+            <span style="top: 60px;font-size: 16px">注册会员</span>
+        </div>
+        <section>账户管理、收货地址<img src="image/右右.png"></section>
+        <div id="some">
+            <div id="one">
+                <span style="font-size: 14px;width: 1.4rem;left: 0.4rem">10<br>关注的商品</span>
+            </div>
+            <div id="two">
+                <span style="font-size: 14px;width: 1.4rem;left: 0.4rem">8<br>关注的店铺</span>
+            </div>
+            <div id="three">
+                <span style="font-size: 14px;width: 1.4rem;left: 0.4rem">31<br>浏览记录</span>
+            </div>
+        </div>
+    </div>
+    <div id="top">
+        <a href="#">
+            <img src="image/scroll-to-top-icon.png">
+        </a>
+    </div>
+    <div id="my">
+            <img style="top: 20px;left: 12px" src="image/57147ba3Ne2fccde3.png">
+            <span style="font-size: 18px;top: 20px;left: 45px">我的订单</span>
+            <span style="font-size: 15px;color: dimgray;top: 22px;right: 45px">全部订单</span>
+            <img style="top: 22px;right: 12px" src="image/右右.png">
+    </div>
+    <div id="bus">
+            <img style="left: 0.6rem" src="image/57147baaNf2463e54.png"><br>
+            <span style="left: 0.5rem">待付款</span>
+            <img style="left: 3.3rem" src="image/57147bb0N365a03ef.png"><br>
+            <span style="left: 3.1rem">待收货</span>
+            <img style="right: 1rem" src="image/57147bbbN2cf7ffd7.png"><br>
+            <span style="right: 0.6rem">返修/退货</span>
+    </div>
+    <div id="wal">
+        <img style="top: 20px;left: 12px" src="image/57147bc1N111ca2fd.png">
+        <span style="font-size: 18px;top: 20px;left: 45px">我的钱包</span>
+        <img style="top: 22px;right: 12px" src="image/右右.png">
+    </div>
+    <div id="wale">
+        <section style="left: 0.69rem">0.0</section><br>
+        <span style="left: 0.43rem">账户余额</span>
+        <section style="left: 2.6rem">0</section><br><br>
+        <span style="left: 2.35rem">优惠券</span>
+        <section style="right: 2.45rem">0</section><br><br>
+        <span style="right: 2.5rem">京豆</span>
+        <section style="right: 0.65rem">0.0</section><br>
+        <span style="right: 0.3rem">京东卡/E卡</span>
+    </div>
+    <div id="server">
+        <img style="top: 20px;left: 12px" src="image/57147bf1N90443ef3.png">
+        <span style="font-size: 18px;top: 20px;left: 45px">服务管家</span>
+        <span style="font-size: 15px;color: dimgray;top: 22px;right: 45px">返修/退换货，在线客服</span>
+        <img style="top: 22px;right: 12px" src="image/右右.png">
+    </div>
+    <div id="menber">
+        <img style="top: 20px;left: 12px" src="image/57147c39Nb5ab4575.png">
+        <span style="font-size: 18px;top: 20px;left: 45px">京东会员</span>
+        <span style="font-size: 15px;color: dimgray;top: 22px;right: 45px">会员俱乐部</span>
+        <img style="top: 22px;right: 12px" src="image/右右.png">
+    </div>
+    <div id="poor">
+        <img style="top: 20px;left: 12px" src="image/57357a49N53361612.png">
+        <span style="font-size: 18px;top: 20px;left: 45px">1元抢宝</span>
+        <span style="font-size: 15px;color: dimgray;top: 22px;right: 45px">一元成就梦想</span>
+        <img style="top: 22px;right: 12px" src="image/右右.png">
+    </div>
+    <div id="full">
+        <img style="top: 20px;left: 12px" src="image/57147c2dNb798960d.png">
+        <span style="font-size: 18px;top: 20px;left: 45px">京东福卡</span>
+        <img style="top: 22px;right: 12px" src="image/右右.png">
+    </div>
+    <div id="yuyue">
+        <img style="top: 20px;left: 12px" src="image/57147c22Nf23121b7.png">
+        <span style="font-size: 18px;top: 20px;left: 45px">我的预约</span>
+        <img style="top: 22px;right: 12px" src="image/右右.png">
+    </div>
+    <div id="bigou">
+        <img style="top: 20px;left: 12px" src="image/57147bc1N111ca2fd.png">
+        <span style="font-size: 18px;top: 20px;left: 45px">我的必购码</span>
+        <img style="top: 22px;right: 12px" src="image/右右.png">
+    </div>
+    <div id="tuijian">
+        <img style="top: 20px;left: 12px" src="image/57147d16N89b377b4.jpg">
+        <span style="font-size: 18px;top: 20px;left: 45px">应用推荐</span>
+        <img style="top: 22px;right: 12px" src="image/右右.png">
+    </div>
+    <div id="foryour">
+        <hr>
+        <img src="image/向上.png">
+        <section>为您推荐</section>
+    </div>
+    <div id="sp">
+        <div class="first">
+            <div class="one">
+                <img src="image/580816e8N5c72d2e0.jpg">
+                <section>【京东超市】百草味 休闲 零食 晋江猪肉铺200g/袋</section>
+                <span style="margin-top: -7px;font-size: 18px;color: red">￥17.22</span>
+                <span style="float: right;margin-top: -25px;padding-right: 10px;color: dimgray;z-index: 10">看相似</span>
+            </div>
+            <div class="two">
+                <img src="image/57453dfeNf0e3ef42.jpg">
+                <section>康夫(Kangfu)KF8905美发套装电吹风2300W大功率电吹筒</section>
+                <span style="margin-top: -7px;font-size: 18px;color: red">￥23.26</span>
+                <span style="float: right;margin-top: -25px;padding-right: 10px;color: dimgray;z-index: 10">看相似</span>
+            </div>
+        </div>
+        <div class="second" style="position: relative;top: 180px">
+            <div class="one">
+                <img src="image/580816e8N5c72d2e0.jpg">
+                <section>【京东超市】百草味 休闲 零食 晋江猪肉铺200g/袋</section>
+                <span style="margin-top: -7px;font-size: 18px;color: red">￥56.22</span>
+                <span style="float: right;margin-top: -25px;padding-right: 10px;color: dimgray;z-index: 10">看相似</span>
+            </div>
+            <div class="two">
+                <img src="image/58048f49Nd6f1e812.jpg">
+                <section>康夫(Kangfu)KF8905美发套装电吹风2300W大功率电吹筒</section>
+                <span style="margin-top: -7px;font-size: 18px;color: red">￥98.26</span>
+                <span style="float: right;margin-top: -25px;padding-right: 10px;color: dimgray;z-index: 10">看相似</span>
+            </div>
+        </div>
+        <div class="second" style="position: relative;top: 360px">
+            <div class="one">
+                <img src="image/5807331fN522e8fbc.jpg">
+                <section>【京东超市】百草味 休闲 零食 晋江猪肉铺200g/袋</section>
+                <span style="margin-top: -7px;font-size: 18px;color: red">￥45.22</span>
+                <span style="float: right;margin-top: -25px;padding-right: 10px;color: dimgray;z-index: 10">看相似</span>
+            </div>
+            <div class="two">
+                <img src="image/5723219fN29129482.jpg">
+                <section>康夫(Kangfu)KF8905美发套装电吹风2300W大功率电吹筒</section>
+                <span style="margin-top: -7px;font-size: 18px;color: red">￥67.26</span>
+                <span style="float: right;margin-top: -25px;padding-right: 10px;color: dimgray;z-index: 10">看相似</span>
+            </div>
+        </div>
+    </div>
+    <div style="width: 7.2rem;background-color: #F0F2F5">
+        <img style="display: block;margin: 0 auto;padding-top: 600px;background-color: #F0F2F5" src="image/no-more-joy2.png">
+    </div>
+</div>
+</body>
+</html>
+<script>
+//       页面样式
+    function fullwidth() {
+        if ($('body').width() <= 360) {
+            $('html').css('fontSize', '50');
+            return;
+        }
+            if ($('body').width() >=720) {
+                $('html').css('font-size', 100 + 'px');
+                return;
+            }
+        var scale = $('body').width() / 360;
+        $('html').css('font-size', scale * 50 + 'px');
+    }
+
+    fullwidth();
+    $(window).resize(function () {
+        fullwidth();
+    })
+
+    var bol = false
+    $('.block').click(function(){
+        if(bol==false){
+        $('#hidden').show()
+            bol = true
+        }
+        else{
+            $('#hidden').hide()
+            bol = false
+        }
+    })
+//    跳转首页
+    $('#beganing').click(function(){
+        location.href = '京东首页.html'
+    })
+</script>
+<script>
+    window.onscroll = function(){
+        var scrollTop = document.documentElement.scrollTop||document.body.scrollTop;
+        if(scrollTop>250){
+            document.querySelector('#top').style.display = 'block'
+        }
+        else{
+            document.querySelector('#top').style.display = 'none'
+        }
+    }
+</script>

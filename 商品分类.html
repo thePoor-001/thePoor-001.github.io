@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="initial-scale=1,user-scalable=no">
+    <script src="jquery-2.2.4.js"></script>
+    <title>商品分类</title>
+    <style>
+        *{box-sizing: border-box}
+        html{font-size: 50px}
+        html,body{margin: 0;border:0;padding: 0;}
+        #all{margin: 0 auto;border: 1px solid gainsboro;cursor: pointer;width: 7.2rem;height: 12rem;position: relative}
+        #all #header{margin:-1px;width:7.2rem;height:50px;border:1px solid gainsboro;display:flex;justify-content:space-between;padding-top: 5px;background-color: ghostwhite;}
+        #all #header div{width:5.2rem;height:40px;-moz-border-radius:5px;-webkit-border-radius:5px;border-radius:5px;color: gray;font-size: 15px;background-color: white;border: 1px solid gainsboro;padding-top: 8px}
+        #all #header img{height:28px;width:28px;margin-top: 6px}
+        /*#empty{height:50px;}*/
+        #hidden{background-color: black;opacity: 0.8;width: 7.2rem;height: 70px;padding-top: 10px;display: none;margin: 0 auto}
+        #hidden div{width: 7.2rem;display: flex;justify-content: space-around}
+        #hidden div img{width: 30px;height: 30px;}
+        #hidden section{width: 7.2rem;display: flex;justify-content: space-around}
+        #hidden section span{display: block;font-size: 15px;color: white;margin-left: 18px}
+        #block{margin: 0;padding: 0;display: none}
+        #block #head{height:0.9rem;width:100%;display: flex;justify-content: space-between;margin-top: 0.1rem;border-bottom: 0.005rem solid gainsboro;padding: 0.2rem}
+        #block #head img{width: 0.4rem;height: 0.4rem}
+        #block #hot{margin-top: -0.6rem}
+        #block #hot span{font-size: 0.25rem;margin-left: 0.1rem}
+        #block #hot img{width: 0.4rem;height: 0.4rem;position: relative;left: 5.2rem;top: 0.12rem}
+        #block .search{margin-left: 0.1rem;margin-top: -0.3rem}
+        #block .search span{font-size: 0.25rem;color: grey;border: solid 0.001rem gainsboro;padding: 0.12rem 0.4rem;border-radius: 0.2rem;margin-left: 0.15rem;cursor: pointer}
+        #list{padding:0;margin: 0;width: 100px;height: 650px;border-right: 1px solid  gainsboro;overflow: scroll;}
+        #list section{margin: 0;width:95px;height: 50px;font-size: 14px;opacity: 0.8;border-bottom: 1px solid gainsboro;padding: 15px 18px}
+        .count1{position: absolute;top: 60px;margin-left: 105px;}
+        .hengfu{position:absolute;left:0;height: 160px;width: 6.1rem;}
+        .count1 section{font-size: 15px;position: absolute;top:180px;opacity: 0.8;width: 70px}
+        .up{position: absolute;top: 200px;width: 6rem;height: 140px}
+        .up img{width: 70px;height: 70px;position: absolute}
+        .up p{font-size: 15px;color: dimgray;position: absolute}
+        .hot{position: absolute;top: 320px;left:0;width: 5.3rem}
+        .hot span{font-size: 15px;color: dimgray;position: absolute}
+        .hot img{width: 25px;height: 25px;position: absolute}
+        .down{position: absolute;top: 400px;width: 5.8rem}
+        .one img{width: 50px;height: 50px;position: absolute;top: 0}
+        .two span{font-size: 15px;color: dimgray;position: absolute;}
+        .count2{position: absolute;top: 60px;margin-left: 105px;display: none}
+        .count2 section{font-size: 15px;position: absolute;top:180px;opacity: 0.8;width: 70px}
+        .count3{position: absolute;top: 60px;margin-left: 105px;display: none}
+        .count3 section{font-size: 15px;position: absolute;top:180px;opacity: 0.8;width: 70px}
+    </style>
+</head>
+<body>
+<div id="all">
+    <div id="header">
+        <a href="京东首页.html"><img style="position: absolute;top: 5px;left: 1px" src="image/左左.png"></a>
+        <div>&nbsp;&#x3000;京东3C&nbsp;百万件爆品岂止五折</div>
+        <img id="menu" class="block" src="image/菜单.png">
+    </div>
+    <div id="hidden">
+        <div>
+            <img src="image/首页-首页.png" alt="">
+            <img src="image/搜索.png" alt="">
+            <img src="image/购物车.png" alt="">
+            <img src="image/用户.png" alt="">
+        </div>
+        <section>
+            <span>首页</span>
+            <span>分类搜索</span>
+            <span>购物车</span>
+            <span>我的京东</span>
+        </section>
+    </div>
+    <div id="list">
+        <section style="color: red ">热门推荐</section>
+        <section>潮流女装</section>
+        <section>品牌男装</section>
+        <section>个性护肤</section>
+        <section>家用电器</section>
+        <section>电脑办公</section>
+        <section>手机数码</section>
+        <section>母婴童装</section>
+        <section>图书</section>
+        <section>家居家纺</section>
+        <section>居家生活</section>
+        <section>玩具乐器</section>
+        <section>运动户外</section>
+        <section>酒水饮料</section>
+        <section>食品生鲜</section>
+        <section>钟表珠宝</section>
+        <section>生活旅行</section>
+        <section>宠物农资</section>
+    </div>
+    
+    <div class="count1">
+        <img class="hengfu" src="image/hengfu.jpg">
+        <section>专场推荐</section>
+        <div class="up">
+            <img style="left: 1rem;top: 10px" src="image/58047df4Nc7f4f6c7.jpg" alt="">
+            <img style="left: 3.5rem;top: 10px" src="image/58048f49Nd6f1e812.jpg" alt="">
+            <p  style="left: 1rem;top: 70px">畅销图书榜</p>
+            <p  style="left: 3.5rem;top: 70px">雾霾专场</p>
+        </div>
+        <div class="hot">
+            <span style="">热门分类</span>
+            <img style="right:0" src="image/右右.png">
+            <span style="right:25px;top: 2px">排行榜</span>
+            <img style="right: 70px" src="image/排行榜.png">
+
+        </div>
+        <div class="down">
+            <div class="one">
+                <img style="top: -10px;left: 24px" src="image/580816e1N6a513209.jpg">
+                <img style="top: -10px;left: 2.4rem" src="image/580816e8N5c72d2e0.jpg">
+                <img style="top: -10px;right: 32px;" src="image/580870d4Neb8e797f.jpg">
+            </div>
+            <div class="two">
+                <span style="left: 32px;top: 50px">手机</span>
+                <span style="top: 50px;left: 2.43rem">笔记本</span>
+                <span style="right: 45px;top: 50px">空调</span>
+            </div>
+            <div class="one">
+                <img style="top: 100px;left: 24px" src="image/5802504cN5283f3b8.jpg" alt="">
+                <img style="top: 100px;left: 2.4rem" src="image/5723219fN29129482.jpg" alt="">
+                <img style="top: 100px;right: 32px" src="image/5800942fNe44945ac.jpg" alt="">
+            </div>
+            <div class="two">
+                <span style="left: 32px;top: 150px">炒锅</span>
+                <span style="left: 2.56rem;top: 150px">啤酒</span>
+                <span style="right: 45px;top: 150px">土豆</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="count2">
+        <img class="hengfu" src="image/58089c49N9e018cc8.jpg">
+        <section>专场推荐</section>
+        <div class="up">
+            <img style="left: 1rem;top: 10px" src="image/580746d4Nbb0e2c78.png" alt="">
+            <img style="left: 3.5rem;top: 10px" src="image/rBEQWVNXnc0IAAAAAAIhRQ00Xj0AAFREADAiJ8AAiFd633.jpg" alt="">
+            <p style="left: 1rem;top: 70px">畅销图书榜</p>
+            <p style="left: 3.5rem;top: 70px">雾霾专场</p>
+        </div>
+        <div class="hot">
+            <span style="">热门分类</span>
+            <img style="right:0" src="image/右右.png">
+            <span style="right:25px;top: 2px">排行榜</span>
+            <img style="right: 70px" src="image/排行榜.png">
+
+        </div>
+        <div class="down">
+            <div class="one">
+                <img style="top: -10px;left: 24px" src="image/5807273eN25436538.jpg">
+                <img style="top: -10px;left: 2.4rem" src="image/580899e1N55ae4f01.png">
+                <img style="top: -10px;right: 32px;" src="image/56317657N542af921.jpg">
+            </div>
+            <div class="two">
+                <span style="left: 32px;top: 50px">手机</span>
+                <span style="top: 50px;left: 2.43rem">笔记本</span>
+                <span style="right: 45px;top: 50px">空调</span>
+            </div>
+            <div class="one">
+                <img style="top: 100px;left: 24px" src="image/58038b61N81ae05da.png" alt="">
+                <img style="top: 100px;left: 2.4rem" src="image/58087d83Nded00813.jpg" alt="">
+                <img style="top: 100px;right: 32px" src="image/58003401N3d6ec3c8.jpg" alt="">
+            </div>
+            <div class="two">
+                <span style="left: 32px;top: 150px">炒锅</span>
+                <span style="left: 2.56rem;top: 150px">啤酒</span>
+                <span style="right: 45px;top: 150px">土豆</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="count3">
+        <img class="hengfu" src="image/a1.jpg">
+        <section>专场推荐</section>
+        <div class="up">
+            <img style="left: 1rem;top: 10px" src="image/57453dfeNf0e3ef42.jpg" alt="">
+            <img style="left: 3.5rem;top: 10px" src="image/58048f49Nd6f1e812.jpg" alt="">
+            <p  style="left: 1rem;top: 70px">畅销图书榜</p>
+            <p  style="left: 3.5rem;top: 70px">雾霾专场</p>
+        </div>
+        <div class="hot">
+            <span style="">热门分类</span>
+            <img style="right:0" src="image/右右.png">
+            <span style="right:25px;top: 2px">排行榜</span>
+            <img style="right: 70px" src="image/排行榜.png">
+
+        </div>
+        <div class="down">
+            <div class="one">
+                <img style="top: -10px;left: 24px" src="image/580816e1N6a513209.jpg">
+                <img style="top: -10px;left: 2.4rem" src="image/580816e8N5c72d2e0.jpg">
+                <img style="top: -10px;right: 32px;" src="image/580870d4Neb8e797f.jpg">
+            </div>
+            <div class="two">
+                <span style="left: 32px;top: 50px">手机</span>
+                <span style="top: 50px;left: 2.43rem">笔记本</span>
+                <span style="right: 45px;top: 50px">空调</span>
+            </div>
+            <div class="one">
+                <img style="top: 100px;left: 24px" src="image/58070a99N0f80f802.jpg" alt="">
+                <img style="top: 100px;left: 2.4rem" src="image/579867d4N66032aa7.jpg" alt="">
+                <img style="top: 100px;right: 32px" src="image/5807331fN522e8fbc.jpg" alt="">
+            </div>
+            <div class="two">
+                <span style="left: 32px;top: 150px">炒锅</span>
+                <span style="left: 2.56rem;top: 150px">啤酒</span>
+                <span style="right: 45px;top: 150px">土豆</span>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+</div>
+<div id="block">
+    <div id="head" style="box-sizing: border-box;padding: 0.1rem;margin: 0">
+        <img src="image/关闭.png" style="position: relative;top: 0.13rem;left: 0.1rem;cursor: pointer" >
+        <input type="text" style="height: 0.7rem;width: 5.6rem;position: absolute;top: 0.1rem;left: 0.8rem" placeholder="家纺超极品类目，万件商品1元秒！">
+        <!--<input type="text" style="width: 0.55rem;height: 0.7rem;margin-top: -0.2rem;margin-left: -0.12rem;border-left: none">-->
+        <img src="image/搜索.png" style="border-left: solid 0.001rem gainsboro; position: relative;left: -0.7rem;top: 0;padding: 0.35rem">
+    </div>
+    <div id="hot">
+        <span>热门搜索</span>
+        <img src="image/刷新.png" style="cursor: pointer">
+    </div>
+    <div class="search">
+        <span>山茶仔油</span>
+        <span>spa仔油</span>
+        <span>手摇磨豆机</span>
+    </div>
+    <div class="search">
+        <span>农夫山泉</span>
+        <span>百事可乐</span>
+        <span>拿铁咖啡</span>
+    </div>
+</div>
+</body>
+</html>
+<script>
+    function fullwidth() {
+        if ($('body').width() <= 360) {
+            $('html').css('font-size', 50 + 'px');
+            return;
+        }
+        if ($('body').width() >=720) {
+            $('html').css('font-size', 100 + 'px');
+            return;
+        }
+        var scale = $('body').width() / 360;
+        $('html').css('font-size', scale * 50 + 'px');
+    }
+
+    fullwidth();
+    $(window).resize(function () {
+        fullwidth();
+    })
+</script>
+<script>
+    $('#header').find('div').click(function(){
+        $('#all').hide();
+        $('#block').show()
+    })
+    $('#head img').eq(0).click(function(){
+        $('#all').show();
+        $('#block').hide()
+    })
+//    遍历热门搜索
+    $('#block .search span').each(function(index){
+        var ab = this;
+        $(ab).click(function(){
+            $('#block #head input').val($(ab).html())
+        })
+    })
+
+//    遍历商品分类
+    $('#list section').each(function(index){
+        var tab = this;
+        $(tab).click(function(){
+            $('#list section').siblings().css('color',"black")
+            $(tab).css('color','red')
+            if(index==0){
+                $('.count1').fadeIn()
+                $('.count2').hide()
+                $('.count3').hide()
+            }
+            if(index==1){
+                $('.count2').fadeIn()
+                $('.count1').hide()
+                $('.count3').hide()
+            }
+            if(index==2){
+                $('.count3').fadeIn()
+                $('.count1').hide()
+                $('.count2').hide()
+            }
+            if(index==3){
+                $('.count1').fadeIn()
+                $('.count2').hide()
+                $('.count3').hide()
+            }
+            if(index==4){
+                $('.count2').fadeIn()
+                $('.count1').hide()
+                $('.count3').hide()
+            }
+            if(index==5){
+                $('.count3').fadeIn()
+                $('.count1').hide()
+                $('.count2').hide()
+            }
+            if(index==5){
+                $('.count1').fadeIn()
+                $('.count2').hide()
+                $('.count3').hide()
+            }
+            if(index==6){
+                $('.count2').fadeIn()
+                $('.count1').hide()
+                $('.count3').hide()
+            }
+            if(index==7){
+                $('.count3').fadeIn()
+                $('.count1').hide()
+                $('.count2').hide()
+            }
+            if(index==8){
+                $('.count1').fadeIn()
+                $('.count2').hide()
+                $('.count3').hide()
+            }
+            if(index==9){
+                $('.count2').fadeIn()
+                $('.count1').hide()
+                $('.count3').hide()
+            }
+            if(index==10){
+                $('.count3').fadeIn()
+                $('.count1').hide()
+                $('.count2').hide()
+            }
+            if(index==11){
+                $('.count1').fadeIn()
+                $('.count2').hide()
+                $('.count3').hide()
+            }
+            if(index==12){
+                $('.count2').fadeIn()
+                $('.count1').hide()
+                $('.count3').hide()
+            }
+            if(index==13){
+                $('.count3').fadeIn()
+                $('.count1').hide()
+                $('.count2').hide()
+            }
+            if(index==14){
+                $('.count1').fadeIn()
+                $('.count2').hide()
+                $('.count3').hide()
+            }
+            if(index==15){
+                $('.count2').fadeIn()
+                $('.count1').hide()
+                $('.count3').hide()
+            }
+            if(index==16){
+                $('.count3').fadeIn()
+                $('.count1').hide()
+                $('.count2').hide()
+            }
+            if(index==17){
+                $('.count1').fadeIn()
+                $('.count2').hide()
+                $('.count3').hide()
+            }
+        })
+    })
+//    显示与隐藏菜单
+//    $('#menu').click(function(){
+//        $('#hidden').toggle()
+//    })
+
+</script>

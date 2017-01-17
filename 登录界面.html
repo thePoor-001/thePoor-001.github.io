@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="initial-scale=1,user-scalable=no">
+    <script type="text/javascript" src="jquery-2.2.4.js"></script>
+    <title>登录界面</title>
+    <style>
+        *{-webkit-box-sizing: border-box;-moz-box-sizing: border-box;box-sizing: border-box;}
+        html,body{margin: 0;padding: 0;border: 0}
+        #header{margin: 0;width: 100%;height: 50px;background-color:#F9F9F9;text-align: center;padding-top: 10px;;border-bottom: 1px solid lightgrey}
+        #header img{width: 30px;height: 30px;float: left}
+        #header span{font-size: 20px;opacity: 0.5;filter: alpha(opacity=50);display: block}
+        #all{margin: 0 auto;width: 7.2rem;height: 10rem;position: relative}
+        #all .one{display: flex;flex-direction: column;justify-content: space-around;height: 210px;margin-top: 20px; }
+        #all input{width: 6.5rem;height: 45px;font-size: 17px;opacity: 0.6;border:1px gainsboro solid;border-radius: 3px;margin-left:20px;}
+        #all #ab img{opacity: 0.3;filter: alpha(opacity=30);position: absolute;width: 27px;height: 27px;cursor: pointer;display: none}
+        #all #change{width: 70px;height: 35px;border:gainsboro solid 1px;position: absolute;border-radius: 20px;cursor: pointer;font-size: 16px;padding: 7px;color: white }
+        #all #change #squeal{width: 35px;height: 35px;position: absolute;border: gainsboro solid 1px;border-radius: 20px;}
+        #all #began{cursor:pointer;font-size: 18px;width: 6.5rem;margin-left:20px;height: 40px;background-color: lightgray;text-align: center;margin-top: 20px;padding-top: -2px;opacity: 0.4;border: none}
+        .choose{height: 22px;width: 22px;border-radius: 50%;border:1px solid gainsboro;position: relative;overflow: hidden;top: 43px;left: 20px}
+        .choose:hover{cursor: pointer}
+        .choose img{height: 17px;width: 17px;position: absolute;top: 2px;left: 3px;display: none}
+        #all #month span{font-size: 17px;color: #615A5A;float: left;display: block;margin-top: 20px;margin-left: 50px}
+        #any span{font-size: 18px;color: black;opacity: 0.8}
+        #any{margin-top: 90px;padding-left: 20px;padding-right: 0.7rem;cursor: pointer}
+        #other{width: 7.2rem;height:100px;position: relative;top: 90px;}
+        #other #slin{width: 6.4rem;position:absolute;opacity: 0.3;filter: alpha(opacity=30);height: 2px;top: 10px;left: 0.4rem;border: 1px solid darkgrey}
+        #other section{font-size: 19px;font-weight: 800;background-color: ghostwhite;width: 150px;height: 50px;position: absolute;top:-3px;left: 2.7rem;opacity: 0.8;padding-left: 20px}
+        .img1{display: block;position: absolute;top: 40px;left: 3.33rem}
+    </style>
+</head>
+<body style="background-color: ghostwhite">
+<div id="header">
+    <a href="京东首页.html"><img id="img3" src="image/左左.png"></a>
+    <span>京东登录</span>
+</div>
+<div id="all">
+    <div class="one">
+    <input type="text" placeholder="&nbsp;&nbsp;用户名/邮箱/已验证手机">
+    <input type="password" placeholder="&nbsp;&nbsp;请输入密码">
+    <input type="text" placeholder="&nbsp;&nbsp;请输入验证码">
+    </div>
+    <div id="ab">
+    <img style="top:20px;right: 2rem" src="image/叉叉%20(1).png" alt="">
+    <img style="top:90px;right: 2rem" src="image/叉叉%20(1).png" alt="">
+    <img style="top:161px;right: 2rem" src="image/叉叉%20(1).png" alt="">
+    </div>
+    <div id="change" style="right: 0.65rem;top: 87px">
+        abc
+        <div style="top:0;right: 35px;margin: -1px" id="squeal"></div>
+    </div>
+    <button id="began">登&#x3000;录&#x3000;&#x3000;</button>
+    <div style="position: absolute" id="month">
+        <div class="choose"><img src="image/32勾勾.png"></div>
+        <span>一个月内免登陆</span>
+    </div>
+    <div id="any">
+        <img style="float: left;margin-top: -2px" src="image/找回密码.PNG" alt="">
+        <span style="float: left">找回密码</span>
+        <img style="float: right;margin-top: 1px" src="image/快速注册.PNG" alt="">
+        <span style="float: right">快速注册</span>
+    </div>
+    <div id="other">
+        <div id="slin"></div>
+        <section>其他登录方式</section>
+        <img class="img1" src="image/QQ.PNG" alt="">
+    </div>
+
+
+</div>
+</body>
+</html>
+<script>
+    $(function(){
+        function fullwidth() {
+            if ($('body').width() <= 360) {
+                $('html').css('font-size', 50 + 'px');
+                return;
+            }
+            if ($('body').width() >=720) {
+                $('html').css('font-size', 100 + 'px');
+                return;
+            }
+            var scale = $('body').width() / 360;
+            $('html').css('font-size', scale * 50 + 'px');
+        }
+
+        fullwidth();
+        $(window).resize(function () {
+            fullwidth();
+        })
+
+    })
+</script>
+<script>
+    $('body').click(function(){
+        $('#ab').find('img').hide()
+    })
+    $('.one').find('input').each(function(index){
+        $( this).click(function(e){
+            e.stopPropagation()
+            $('#ab').find('img').hide()
+           $('#ab').find('img').eq(index).show()
+        })
+    })
+    $('#all').find('img').each(function(index){
+        $(this).click(function(){
+        $('.one').find('input').eq(index).val("")
+        })
+    })
+    var bol = false;
+    $('#change').find('#squeal').click(function(){
+
+        if(bol==false){
+            $(this).animate({
+                right:'0'
+            },150)
+            bol=true
+            $('#change').css('background','red')
+            $(this).css('background','white')
+            document.querySelectorAll('input')[1].setAttribute('type','text')
+        }
+        else{
+            $(this).animate({
+                right:'35'
+            },150)
+            bol=false;
+            $('#change').css('background','')
+            document.querySelectorAll('input')[1].setAttribute('type','password')
+        }
+    })
+//    选择免登陆
+    var bol3 = false;
+    $('#month').find('.choose').click(function(){
+        if(bol3==false){
+            $(this).css('background','red')
+            $('.choose').find('img').show()
+            bol3 = true;
+        }
+        else{
+            $(this).css('background','')
+            $('.choose').find('img').hide()
+            bol3 = false;
+
+        }
+    })
+
+</script>
